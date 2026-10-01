@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自然災害與土地退化｜高中地理・地球科學 互動學習與模擬實驗室</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            },
+            hazard: {
+              water: '#0284c7',
+              geo: '#b45309',
+              weather: '#6366f1',
+              land: '#d97706',
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans TC"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap');
+    
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .dark .glass-nav {
+      background: rgba(15, 23, 42, 0.85);
+    }
+    
+    .card-hover {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Print styles */
+    @media print {
+      nav, footer, .no-print {
+        display: none !important;
+      }
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased transition-colors duration-200">
+
+  <!-- ==================== HEADER & NAVBAR ==================== -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">地理與地球科學・Super講義</span>
+          <h1 class="text-base sm:text-lg font-bold leading-tight truncate">Ch02 自然災害與土地退化</h1>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-medium">
+        <a href="#overview" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">課程架構</a>
+        <a href="#lab" class="px-3 py-1.5 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition font-semibold">🔬 互動實驗室</a>
+        <a href="#quiz" class="px-3 py-1.5 rounded-lg text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/40 transition font-semibold">🏆 大考題庫實戰</a>
+        <a href="#tek" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">傳統生態知識(TEK)</a>
+        <a href="#glossary" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">核心詞典</a>
+      </nav>
+
+      <!-- Functional Controls -->
+      <div class="flex items-center space-x-2">
+        <!-- Sound FX Toggle -->
+        <button id="soundToggleBtn" onclick="toggleSound()" title="切換互動音效" class="p-2 rounded-lg text-slate-500 hover:text-emerald-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <svg id="soundOnIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+          </svg>
+          <svg id="soundOffIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>
+          </svg>
+        </button>
+
+        <!-- Dark/Light Mode -->
+        <button id="themeToggleBtn" onclick="toggleDarkMode()" title="切換深淺模式" class="p-2 rounded-lg text-slate-500 hover:text-amber-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+          <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+        </button>
+
+        <!-- Print Worksheets -->
+        <button onclick="window.print()" class="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-xs font-semibold transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+          </svg>
+          <span>列印講義單</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO BANNER ==================== -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-emerald-500/10 via-teal-500/5 to-transparent pt-10 pb-12 border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 mb-4 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          高中地理學測・分科測驗必備主題
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+          自然災害・土地退化<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 dark:from-emerald-400 dark:via-teal-400 dark:to-cyan-400">與傳統生態知識 (TEK)</span>
+        </h2>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300">
+          結合講義投影片精華、<b>水文歷線即時模擬器</b>、<b>崩壞判識儀</b>、<b>達悟族飛魚季生態時鐘</b>與<b>12道歷屆分科大考試題實戰</b>，打造沉浸式探究與實作平台。
+        </p>
+
+        <!-- Quick Jump Badges -->
+        <div class="mt-6 flex flex-wrap justify-center gap-2 text-xs font-semibold">
+          <a href="#lab-hydro" class="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 rounded-full hover:shadow transition">🌊 水文歷線動態模擬</a>
+          <a href="#lab-slope" class="px-3 py-1.5 bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 rounded-full hover:shadow transition">⛰️ 坡地崩壞四大機制</a>
+          <a href="#lab-tek" class="px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 rounded-full hover:shadow transition">🐟 飛魚季與TEK時鐘</a>
+          <a href="#lab-land" class="px-3 py-1.5 bg-orange-100 dark:bg-orange-900/50 text-orange-800 dark:text-orange-300 rounded-full hover:shadow transition">🏜️ 沙漠化與鹽鹼化</a>
+          <a href="#quiz" class="px-3 py-1.5 bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300 rounded-full hover:shadow transition">🎯 12題大考題庫</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16 flex-1">
+
+    <!-- SECTION 1: 課程核心概念地圖 (Tabs & Architecture) -->
+    <section id="overview" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Module 01</span>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white">單元全景架構圖解</h3>
+        </div>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1 sm:mt-0">點擊切換四大模組，查閱講義精華與重點考點</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 p-1.5 bg-slate-200/70 dark:bg-slate-800/70 rounded-2xl">
+        <button onclick="switchTab(0)" class="tab-btn active-tab px-4 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm bg-white dark:bg-slate-700 text-emerald-700 dark:text-emerald-300" data-index="0">
+          🌊 水文與氣候災害
+        </button>
+        <button onclick="switchTab(1)" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-index="1">
+          ⛰️ 坡地與地質災害
+        </button>
+        <button onclick="switchTab(2)" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-index="2">
+          🏜️ 土地退化與調適
+        </button>
+        <button onclick="switchTab(3)" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-index="3">
+          🌿 原住民族生態知識 (TEK)
+        </button>
+      </div>
+
+      <!-- Tab Content Panels -->
+      <div id="tabPanels" class="mt-4">
+
+        <!-- PANEL 0: 水文與氣候災害 -->
+        <div class="tab-panel space-y-6" id="panel-0">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 card-hover">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-300 flex items-center justify-center font-bold">1</span>
+                <h4 class="text-lg font-bold">洪患的四大類型</h4>
+              </div>
+              <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40"><b>海岸洪患：</b>熱帶氣旋引發暴潮、海平面上升、海嘯致海水倒灌。</li>
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40"><b>河岸洪患：</b>豪雨或春季融雪後地表逕流溢過河堤，如基隆河凹岸。</li>
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40"><b>暴洪 (Flash Flood)：</b>中上游山區暴雨宣洩不及，流速急且破壞大。</li>
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40">
+                  <span class="text-rose-600 dark:text-rose-400 font-bold">★ 凌汛 (Ice Jam)：</span>
+                  高緯由低緯流向高緯之河流（如俄羅斯鄂畢河、美加育空河），冬初結冰或春季融冰時，下游未融之浮冰堵塞河道築成「冰壩」溢流致災。
+                </li>
+              </ul>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 card-hover">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 flex items-center justify-center font-bold">2</span>
+                <h4 class="text-lg font-bold">水文歷線關鍵指針</h4>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">水文歷線為某河段流量隨時間變化的曲線。</p>
+              <div class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                <div class="p-2.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-indigo-500">
+                  <b>洪峰流量 (Peak Discharge)：</b>降雨後河水水位達到的最高流量。流量越大，溢堤致災風險越高。
+                </div>
+                <div class="p-2.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/30 border-l-4 border-indigo-500">
+                  <b>洪峰延滯期 (Lag Time)：</b>自最大降雨強度發生至洪峰出現的時距。延滯期越短，應變預警時間越少。
+                </div>
+                <div class="p-2.5 rounded-lg bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-200 text-xs">
+                  ⚡ <b>大考常考規律：</b>都市化（不透水鋪面增多）、集水區砍伐森林、坡度變陡 → <b>洪峰流量激增、延滯期顯著縮短（向左偏移）</b>！
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 card-hover">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-300 flex items-center justify-center font-bold">3</span>
+                <h4 class="text-lg font-bold">極端氣候與野火災害</h4>
+              </div>
+              <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40">
+                  <b>加州聖塔安娜風 (Santa Ana Winds)：</b>
+                  冬季跨越山脈的強勁下坡焚風，劇烈乾燥且風速強，加速野火蔓延，造成洛杉磯重大災情。
+                </li>
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40">
+                  <b>高緯永凍土融解惡性循環：</b>
+                  西伯利亞與阿拉斯加野火燒毀苔原與針葉林，促使永凍土融解釋放高溫室效應的<b>甲烷 (\(CH_4\))</b>，加劇全球暖化。
+                </li>
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40">
+                  <b>臺灣梅雨與颱風：</b>滯留鋒伴隨西南氣流易引發中南部豪大雨；侵臺路徑第7與第9類因未受中央山脈阻擋，對西南部威脅極劇。
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 1: 坡地與地質災害 -->
+        <div class="tab-panel hidden space-y-6" id="panel-1">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+            <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+              塊體運動（坡地崩壞）四大形式縱覽表
+            </h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-sm">
+                <thead>
+                  <tr class="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-slate-700 dark:text-slate-300">
+                    <th class="p-3 font-bold">災害類型</th>
+                    <th class="p-3 font-bold">移動形式</th>
+                    <th class="p-3 font-bold">含水量</th>
+                    <th class="p-3 font-bold">移動速度</th>
+                    <th class="p-3 font-bold">好發環境與特徵</th>
+                    <th class="p-3 font-bold">經典代表個案</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-700/60 text-slate-600 dark:text-slate-300">
+                  <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                    <td class="p-3 font-bold text-amber-700 dark:text-amber-400">山崩與落石 (Rockfall)</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-900/40 text-xs font-semibold">落 (Fall)</span></td>
+                    <td class="p-3">少（多為乾燥）</td>
+                    <td class="p-3 text-rose-600 font-bold">極快 (Instant)</td>
+                    <td class="p-3">陡坡、峭壁、斷崖下方，重力直接墜落</td>
+                    <td class="p-3">蘇花公路落石、加州公路落石</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                    <td class="p-3 font-bold text-amber-700 dark:text-amber-400">地滑 (Landslide)</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/40 text-xs font-semibold">滑 (Slide)</span></td>
+                    <td class="p-3">中至多（水飽和）</td>
+                    <td class="p-3 font-semibold">快速至中等</td>
+                    <td class="p-3 font-medium text-emerald-600 dark:text-emerald-400">順向坡（岩層走向與坡向一致），沿滑動面整體下滑</td>
+                    <td class="p-3">國道3號七堵走山、新北瑞芳猴硐鐵路邊坡坍塌</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                    <td class="p-3 font-bold text-amber-700 dark:text-amber-400">土石流 (Debris Flow)</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-900/40 text-xs font-semibold">流 (Flow)</span></td>
+                    <td class="p-3 text-cyan-600 font-bold">大量水分飽和</td>
+                    <td class="p-3 font-semibold">極快（如液態流動）</td>
+                    <td class="p-3">暴雨過後的溪谷、山溝，夾帶巨礫向下游沖刷，於出口形成扇形堆積</td>
+                    <td class="p-3">莫拉克小林村滅村（獻肚山山崩+堰塞湖潰決）、松鶴部落</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/30">
+                    <td class="p-3 font-bold text-amber-700 dark:text-amber-400">潛移 (Creep)</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-xs font-semibold">慢移 (Creep)</span></td>
+                    <td class="p-3">乾濕反覆交替</td>
+                    <td class="p-3 text-emerald-600 font-bold">極為緩慢（不易察覺）</td>
+                    <td class="p-3">表土受熱脹冷縮與凍融重力影響微幅下移，樹幹及電線桿呈彎曲狀</td>
+                    <td class="p-3">桃園東眼山森林遊樂區邊坡</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 地震與土壤液化 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+              <h4 class="text-base font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                臺灣三大地震帶特徵
+              </h4>
+              <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40"><b>西部地震帶：</b>震源淺、活動斷層密布，且位於全臺人口最稠密區，災情往往最慘重（如921集集大地震）。</li>
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40"><b>東北部地震帶：</b>淺層活動，伴隨地熱與火山（龜山島海域活動）。</li>
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40"><b>東部地震帶：</b>菲律賓海板塊向歐亞板塊隱沒帶，地震次數最多且震源最深（深度可達300公里）。</li>
+              </ul>
+            </div>
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+              <h4 class="text-base font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                土壤液化 (Soil Liquefaction) 三要素
+              </h4>
+              <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40"><b>1. 砂質地層：</b>地表20公尺內富含細砂或粉砂質土層，顆粒膠結性弱。</li>
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40"><b>2. 高地下水位：</b>孔隙被水分高度飽和。</li>
+                <li class="p-2 rounded bg-slate-50 dark:bg-slate-900/40"><b>3. 強烈地震震動：</b>強烈搖晃破壞土粒支撐結構，孔隙水壓驟增噴出地表，造成建築物沉陷與地基失效。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 2: 土地退化與調適治理 -->
+        <div class="tab-panel hidden space-y-6" id="panel-2">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+              <h4 class="text-lg font-bold text-amber-600 dark:text-amber-400 mb-3">🏜️ 沙漠化 (Desertification)</h4>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">
+                因氣候變異與人類不當活動（過度放牧、過度農耕），使乾旱、半乾旱與乾濕分明地區土地生產力喪失。
+              </p>
+              <div class="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-xl text-xs space-y-2 text-slate-700 dark:text-slate-300 border border-amber-200 dark:border-amber-900/40">
+                <div><b>焦點案例：非洲沙黑爾 (Sahel)</b></div>
+                <p>位於撒哈拉沙漠南緣過渡帶，因人口劇增、牲畜過度啃食草場，導致地表裸露加速荒漠化。國際現推行「綠色長城」植被復育計畫。</p>
+                <div class="font-bold text-emerald-600 dark:text-emerald-400">💡 專家智慧考點：半乾旱區為何「以植草取代種樹」？</div>
+                <p>因草類蒸發散量遠小於樹木，且能有效抓地覆蓋表土，避免過多水分耗損，更契合自然生態平衡！</p>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+              <h4 class="text-lg font-bold text-cyan-600 dark:text-cyan-400 mb-3">🧂 土壤鹽鹼化 (Salinization)</h4>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">
+                乾燥、半乾燥或乾濕季分明且蒸發強烈地區，過度大水漫灌導致地下水位上升，透過土壤<b>毛細作用</b>將深層鹽分引至地表，水分蒸發後鹽晶硬結於表土。
+              </p>
+              <div class="p-3 bg-cyan-50 dark:bg-cyan-950/30 rounded-xl text-xs space-y-2 text-slate-700 dark:text-slate-300 border border-cyan-200 dark:border-cyan-900/40">
+                <div><b>焦點案例：衣索比亞與灌溉綠洲</b></div>
+                <p>上千萬公頃良田因不當漫灌而白化硬結，嚴重危害糧食供應。防治策略包括滴灌節水、深層排水暗管洗鹽等。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 荷蘭治水革新與海綿城市 -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+            <h4 class="text-lg font-bold mb-3 flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+              全球減災與調適革新：從「人定勝天」到「人水共生」
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50">
+                <span class="font-bold text-sky-600 dark:text-sky-400 block mb-1">荷蘭：還地於河 (Room for the River)</span>
+                海堤向內陸後撤、河堤外移放寬河道、疏浚河床，將部分早期圍墾之圩田恢復為沼澤湖泊，讓洪水有空間宣洩滞洪，並開發漂浮城市與水陸兩棲屋。
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50">
+                <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">鹿特丹：海綿城市 (Sponge City)</span>
+                下凹式休閒廣場於暴雨時化身滯洪池、地下停車場設置大型蓄水池、廣植綠屋頂與透水鋪面，化被動排水為主動「吸水、蓄水與慢排」。
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50">
+                <span class="font-bold text-amber-600 dark:text-amber-400 block mb-1">日本：韌性防災體系</span>
+                法規嚴訂耐震高標、防災公園配置「爐長椅」（椅座翻開即成煮食爐台）、定期發送多語版《防災手冊》、櫻島居民「克灰袋」與學童安全帽。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 3: 原住民族傳統生態知識 (TEK) -->
+        <div class="tab-panel hidden space-y-6" id="panel-3">
+          <div class="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/40 dark:to-teal-950/40 rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800">
+            <div class="max-w-3xl">
+              <h4 class="text-xl font-bold text-emerald-900 dark:text-emerald-200 mb-2">什麼是傳統生態知識 (TEK)？</h4>
+              <p class="text-sm text-slate-700 dark:text-slate-300">
+                原住民族在漫長世代中，依據長年與自然環境緊密互動的生活與生存經驗，所累積建立的適應生態系統之智慧、習俗規範與倫理信仰。IPCC與聯合國已將TEK視為與現代科學生態知識 (SEK) 互補的關鍵資產。
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div class="text-xs font-bold text-emerald-600 mb-1">內涵一</div>
+              <h5 class="font-bold text-base mb-2">真實事物觀察與命名</h5>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                鄒族/泰雅族稱苦花魚為「真正的魚」（原住民之魚）；卑南族將毛柿命名為 samesamakan 提醒果實細毛令人發癢，將過貓以美味狀聲詞 pa'at 命名。
+              </p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div class="text-xs font-bold text-emerald-600 mb-1">內涵二</div>
+              <h5 class="font-bold text-base mb-2">自然資源系統性管理</h5>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                蘭嶼達悟族（雅美族）飛魚季時間嚴分三季，海域劃分徒手抓小魚區、章魚區、礁石區、船釣區與深海區，避免濫捕維持資源繁衍。
+              </p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div class="text-xs font-bold text-emerald-600 mb-1">內涵三</div>
+              <h5 class="font-bold text-base mb-2">環境變化的今昔對照</h5>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                藉由口述地名記錄生態歷史，例如臺東阿美族「馬武窟溪 (Mabukuru)」意指古昔撒網捕魚豐饒之地，提供歷史生態基線對比。
+              </p>
+            </div>
+            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div class="text-xs font-bold text-emerald-600 mb-1">內涵四</div>
+              <h5 class="font-bold text-base mb-2">環境倫理與價值傳承</h5>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                魯凱族狩獵避開春夏季動物繁殖期，獵場輪流分散；阿美族女性採野菜「只摘嫩葉不連根拔起」；澳洲原住民「冷燃燒」預防火災。
+              </p>
+            </div>
+          </div>
+
+          <!-- TEK vs SEK 對比表 -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+            <h5 class="font-bold text-base mb-3">傳統生態知識 (TEK) vs 現代科學生態知識 (SEK) 比較矩陣</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div class="p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg">
+                <span class="font-bold text-emerald-800 dark:text-emerald-300 block mb-1">🌿 傳統生態知識 (TEK)</span>
+                • 觀察方式：定性 (Qualitative)、整體心靈融入<br>
+                • 資料來源：在地資源直接使用者本身<br>
+                • 經驗累積：世代嘗試與錯誤修正的智慧<br>
+                • 核心哲理：順應自然特性、敬畏生態和諧
+              </div>
+              <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                <span class="font-bold text-blue-800 dark:text-blue-300 block mb-1">🔬 現代科學生態知識 (SEK)</span>
+                • 觀察方式：定量 (Quantitative)、客觀數據量測<br>
+                • 資料來源：受過學術訓練之專業研究者<br>
+                • 經驗累積：嚴謹受控實驗、假設與演繹歸納<br>
+                • 核心哲理：解析物理規律、適度控制與改造
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: 互動模擬實驗室 (Simulators) -->
+    <section id="lab" class="space-y-12">
+      <div class="flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2.001 2.001 0 009 10.172V5L8 4z"></path>
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Module 02</span>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white">互動模擬實驗室</h3>
+        </div>
+      </div>
+
+      <!-- SIMULATOR 1: 水文歷線動態模擬器 -->
+      <div id="lab-hydro" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300">
+              🌊 核心動態探究
+            </div>
+            <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-1">集水區環境與水文歷線 (Hydrograph) 模擬器</h4>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">滑動調整各項環境因子，觀察河流洪峰流量與延滯期的即時形變！</p>
+          </div>
+          <button onclick="resetHydroDefaults()" class="self-start lg:self-auto px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+            重設預設值
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Control Sliders (5 cols) -->
+          <div class="lg:col-span-5 space-y-5 bg-slate-50 dark:bg-slate-900/60 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800">
+            <!-- Slider 1: 降雨強度 -->
+            <div>
+              <div class="flex justify-between text-xs font-bold mb-1">
+                <span>🌧️ 暴雨降水強度</span>
+                <span id="rainValText" class="text-sky-600 font-extrabold">60 mm/hr</span>
+              </div>
+              <input type="range" id="rainInput" min="20" max="150" value="60" step="5" oninput="updateHydrograph()" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-sky-500">
+              <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
+                <span>普通降雨 (20)</span>
+                <span>世紀豪暴雨 (150)</span>
+              </div>
+            </div>
+
+            <!-- Slider 2: 都市化程度 -->
+            <div>
+              <div class="flex justify-between text-xs font-bold mb-1">
+                <span>🏢 都市化／不透水鋪面比例</span>
+                <span id="urbanValText" class="text-amber-600 font-extrabold">30%</span>
+              </div>
+              <input type="range" id="urbanInput" min="0" max="100" value="30" step="5" oninput="updateHydrograph()" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500">
+              <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
+                <span>自然林野 (0%)</span>
+                <span>高度都會水泥 (100%)</span>
+              </div>
+            </div>
+
+            <!-- Slider 3: 森林覆蓋率 -->
+            <div>
+              <div class="flex justify-between text-xs font-bold mb-1">
+                <span>🌲 集水區森林覆蓋率</span>
+                <span id="forestValText" class="text-emerald-600 font-extrabold">70%</span>
+              </div>
+              <input type="range" id="forestInput" min="0" max="100" value="70" step="5" oninput="updateHydrograph()" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+              <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
+                <span>完全裸露光禿 (0%)</span>
+                <span>茂密林冠 (100%)</span>
+              </div>
+            </div>
+
+            <!-- Slider 4: 地形坡度 -->
+            <div>
+              <div class="flex justify-between text-xs font-bold mb-1">
+                <span>⛰️ 集水區平均坡度</span>
+                <span id="slopeValText" class="text-indigo-600 font-extrabold">中等坡度 (25°)</span>
+              </div>
+              <input type="range" id="slopeInput" min="5" max="50" value="25" step="5" oninput="updateHydrograph()" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+              <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
+                <span>平緩盆地 (5°)</span>
+                <span>陡峭峽谷 (50°)</span>
+              </div>
+            </div>
+
+            <!-- Selector 5: 海綿城市滯洪措施 -->
+            <div>
+              <label class="block text-xs font-bold mb-1">🏛️ 治水調適工法（海綿城市／滯洪設施）</label>
+              <select id="spongeSelect" onchange="updateHydrograph()" class="w-full text-xs font-medium bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 focus:ring-2 focus:ring-emerald-500 outline-none">
+                <option value="none">無任何滯洪（傳統硬質水泥排水溝）</option>
+                <option value="basic" selected>一般公園滯洪池與基礎雨水滲透</option>
+                <option value="advanced">荷蘭鹿特丹級「海綿城市」（大型地下水庫＋下凹廣場＋綠屋頂）</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Canvas Chart + Real-time Indicators (7 cols) -->
+          <div class="lg:col-span-7 space-y-4">
+            <!-- Hydrograph Canvas -->
+            <div class="relative bg-slate-900 rounded-2xl p-4 shadow-inner border border-slate-800">
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-2 font-mono">
+                <span class="flex items-center gap-2">
+                  <span class="w-3 h-0.5 bg-emerald-400 inline-block"></span> 當前模擬曲線
+                  <span class="w-3 h-0.5 border-b border-dashed border-slate-500 inline-block"></span> 未開發原始基準
+                </span>
+                <span>Y: 河川流量 (cms) / X: 時間 (小時)</span>
+              </div>
+              <canvas id="hydroCanvas" width="600" height="280" class="w-full h-[260px] rounded-lg"></canvas>
+            </div>
+
+            <!-- Metrics Cards -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="p-3 bg-slate-100 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                <div class="text-[11px] text-slate-500 dark:text-slate-400">洪峰流量 (Q_peak)</div>
+                <div id="statPeak" class="text-lg font-black text-rose-600 dark:text-rose-400 mt-0.5">385 cms</div>
+              </div>
+              <div class="p-3 bg-slate-100 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                <div class="text-[11px] text-slate-500 dark:text-slate-400">洪峰延滯期 (T_lag)</div>
+                <div id="statLag" class="text-lg font-black text-blue-600 dark:text-blue-400 mt-0.5">3.5 小時</div>
+              </div>
+              <div class="p-3 bg-slate-100 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                <div class="text-[11px] text-slate-500 dark:text-slate-400">逕流係數 (Runoff)</div>
+                <div id="statRunoff" class="text-lg font-black text-emerald-600 dark:text-emerald-400 mt-0.5">48%</div>
+              </div>
+              <div class="p-3 bg-slate-100 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 text-center">
+                <div class="text-[11px] text-slate-500 dark:text-slate-400">水患威脅等級</div>
+                <div id="statRisk" class="text-sm font-extrabold text-amber-500 mt-1">中度戒備</div>
+              </div>
+            </div>
+
+            <!-- Dynamic Teaching Explanation -->
+            <div id="hydroExplainBox" class="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs text-slate-700 dark:text-slate-200">
+              💡 <b>水文現象即時剖析：</b>目前集水區具備良好森林涵養與基礎滯洪設施，洪峰相對平緩。若大幅提升都市化鋪面並砍伐林木，洪峰將劇烈抬高且發生時間大幅提前！
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIMULATOR 2: 坡地崩壞地質判識儀 -->
+      <div id="lab-slope" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300">
+            ⛰️ 互動地質剖面
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-1">坡地崩壞（塊體運動）互動判識儀</h4>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">點擊不同崩壞機制，觀察動態地質切面動畫與核心考點特徵！</p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <button onclick="selectSlopeType('rockfall')" id="btn-rockfall" class="slope-type-btn active-slope p-3.5 rounded-xl text-left border border-amber-500 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 font-bold text-sm transition">
+            🪨 山崩與落石
+            <span class="block text-[10px] font-normal text-slate-500 mt-1">峭壁斷崖・極速崩落</span>
+          </button>
+          <button onclick="selectSlopeType('landslide')" id="btn-landslide" class="slope-type-btn p-3.5 rounded-xl text-left border border-slate-200 dark:border-slate-700 hover:border-slate-400 font-bold text-sm transition">
+            📐 地滑 (順向坡)
+            <span class="block text-[10px] font-normal text-slate-500 mt-1">層狀滑移・國道3號災例</span>
+          </button>
+          <button onclick="selectSlopeType('debris')" id="btn-debris" class="slope-type-btn p-3.5 rounded-xl text-left border border-slate-200 dark:border-slate-700 hover:border-slate-400 font-bold text-sm transition">
+            🌊 土石流
+            <span class="block text-[10px] font-normal text-slate-500 mt-1">溪谷流體・扇狀堆積</span>
+          </button>
+          <button onclick="selectSlopeType('creep')" id="btn-creep" class="slope-type-btn p-3.5 rounded-xl text-left border border-slate-200 dark:border-slate-700 hover:border-slate-400 font-bold text-sm transition">
+            🐌 潛移
+            <span class="block text-[10px] font-normal text-slate-500 mt-1">微速蠕動・樹幹電桿彎曲</span>
+          </button>
+        </div>
+
+        <!-- Dynamic Visualization Box -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-slate-50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+          <!-- SVG Diagram Display (6 cols) -->
+          <div class="md:col-span-6 flex justify-center">
+            <div id="slopeSvgContainer" class="w-full max-w-sm h-64 bg-white dark:bg-slate-800 rounded-xl p-4 flex items-center justify-center border border-slate-200 dark:border-slate-700 shadow-inner">
+              <!-- Dynamically populated SVG -->
+            </div>
+          </div>
+
+          <!-- Feature Details (6 cols) -->
+          <div class="md:col-span-6 space-y-3" id="slopeDetailBox">
+            <!-- Dynamically populated details -->
+          </div>
+        </div>
+      </div>
+
+      <!-- SIMULATOR 3: 達悟族飛魚季曆法 TEK 生態時鐘 -->
+      <div id="lab-tek" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300">
+            🐟 傳統生態知識 (TEK) 專題
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-1">蘭嶼達悟族（雅美族）飛魚曆法與海域時空治理</h4>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">點擊不同季節，探究達悟族如何藉由時間輪替與空間分區，實踐海洋生態永續經營！</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Spring -->
+          <div onclick="selectTekSeason('spring')" id="card-spring" class="tek-season-card active-tek-season cursor-pointer p-5 rounded-2xl border-2 border-emerald-500 bg-emerald-50/60 dark:bg-emerald-950/30 transition card-hover">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-black uppercase text-emerald-700 dark:text-emerald-300">陽曆 2 ～ 5 月</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-200 dark:bg-emerald-800 text-[10px] font-bold">祭典開始</span>
+            </div>
+            <h5 class="text-lg font-bold text-slate-900 dark:text-white">🌸 春季：飛魚季節 (Rayon)</h5>
+            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
+              <li>• <b>招魚祭：</b>祈求飛魚豐收與族人出海平安。</li>
+              <li>• 允許夜間以火把誘引捕捉飛魚。</li>
+              <li>• <b>關鍵禁忌：</b>嚴禁捕撈底棲性魚類，讓底棲珊瑚礁生態休養生息！</li>
+            </ul>
+          </div>
+
+          <!-- Summer -->
+          <div onclick="selectTekSeason('summer')" id="card-summer" class="tek-season-card cursor-pointer p-5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition card-hover">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-black uppercase text-amber-700 dark:text-amber-300">陽曆 6 ～ 9 月</span>
+              <span class="px-2 py-0.5 rounded bg-amber-200 dark:bg-amber-800 text-[10px] font-bold">魚汛終了</span>
+            </div>
+            <h5 class="text-lg font-bold text-slate-900 dark:text-white">☀️ 夏季：飛魚終了 (Teiteika)</h5>
+            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
+              <li>• 飛魚汛期結束，<b>嚴禁再捕撈飛魚</b>。</li>
+              <li>• 改捕撈一般魚種食用。</li>
+              <li>• 捕獲之飛魚剖開曬乾儲存，供秋冬補充優質蛋白質。</li>
+            </ul>
+          </div>
+
+          <!-- Winter -->
+          <div onclick="selectTekSeason('winter')" id="card-winter" class="tek-season-card cursor-pointer p-5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition card-hover">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-black uppercase text-blue-700 dark:text-blue-300">陽曆 10 ～ 1 月</span>
+              <span class="px-2 py-0.5 rounded bg-blue-200 dark:bg-blue-800 text-[10px] font-bold">等待繁衍</span>
+            </div>
+            <h5 class="text-lg font-bold text-slate-900 dark:text-white">❄️ 冬季：等待飛魚 (Amian)</h5>
+            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
+              <li>• <b>氣候背景：</b>東北季風強盛，東部海面風浪凶險，減少出海。</li>
+              <li>• 中秋過後禁止再食用飛魚。</li>
+              <li>• 吃不完的飛魚乾掛於屋旁餵食豬狗，不任意丟棄以示敬畏。</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Spatial Marine Zones Diagram -->
+        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800">
+          <h5 class="font-bold text-sm mb-3 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
+            達悟族海域空間分區管理（垂直與水深生態智慧）
+          </h5>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-xs">
+            <div class="p-3 bg-teal-100/60 dark:bg-teal-950/40 rounded-xl">
+              <div class="font-bold text-teal-800 dark:text-teal-300">1. 潮間帶</div>
+              <div class="text-[11px] text-slate-500 mt-1">徒手捕小魚區<br>（婦女採集野菜海菜）</div>
+            </div>
+            <div class="p-3 bg-cyan-100/60 dark:bg-cyan-950/40 rounded-xl">
+              <div class="font-bold text-cyan-800 dark:text-cyan-300">2. 淺海礁區</div>
+              <div class="text-[11px] text-slate-500 mt-1">下網打魚／抓章魚區<br>（潛水魚槍）</div>
+            </div>
+            <div class="p-3 bg-sky-100/60 dark:bg-sky-950/40 rounded-xl">
+              <div class="font-bold text-sky-800 dark:text-sky-300">3. 礁石外緣</div>
+              <div class="text-[11px] text-slate-500 mt-1">礁石區垂釣<br>（定棲珊瑚礁魚類）</div>
+            </div>
+            <div class="p-3 bg-blue-100/60 dark:bg-blue-950/40 rounded-xl">
+              <div class="font-bold text-blue-800 dark:text-blue-300">4. 沿岸水表</div>
+              <div class="text-[11px] text-slate-500 mt-1">拼板舟船釣區<br>（捕捉洄游飛魚群）</div>
+            </div>
+            <div class="p-3 bg-indigo-100/60 dark:bg-indigo-950/40 rounded-xl">
+              <div class="font-bold text-indigo-800 dark:text-indigo-300">5. 遠洋深海</div>
+              <div class="text-[11px] text-slate-500 mt-1">深海大型魚區<br>（鬼頭刀、鮪魚）</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIMULATOR 4: 土地退化因果推演沙盤 -->
+      <div id="lab-land" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-orange-100 dark:bg-orange-900/40 text-orange-800 dark:text-orange-300">
+            🏜️ 因果鏈沙盤
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-1">全球土地退化與沙漠化因果推演</h4>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">點擊不同推演節點，觀察人類活動如何誘發環境連鎖反應與全球調適對策！</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-center">
+          <div class="p-4 rounded-xl bg-orange-50 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-800 text-xs">
+            <span class="w-6 h-6 rounded-full bg-orange-500 text-white font-bold inline-flex items-center justify-center mb-2">1</span>
+            <div class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1">人口激增</div>
+            <p class="text-slate-500 dark:text-slate-400">糧食與生存需求倍增，推升土地集約利用壓力</p>
+          </div>
+          <div class="p-4 rounded-xl bg-orange-50 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-800 text-xs">
+            <span class="w-6 h-6 rounded-full bg-orange-500 text-white font-bold inline-flex items-center justify-center mb-2">2</span>
+            <div class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1">過耕與過牧</div>
+            <p class="text-slate-500 dark:text-slate-400">開墾邊際乾旱地、過度放養牲畜超越環境負載力</p>
+          </div>
+          <div class="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 text-xs">
+            <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-bold inline-flex items-center justify-center mb-2">3</span>
+            <div class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1">植被被破壞</div>
+            <p class="text-slate-500 dark:text-slate-400">土壤裸露失去林冠保護，風蝕與水蝕劇烈加速</p>
+          </div>
+          <div class="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 text-xs">
+            <span class="w-6 h-6 rounded-full bg-rose-500 text-white font-bold inline-flex items-center justify-center mb-2">4</span>
+            <div class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1">沙漠化與鹽鹼化</div>
+            <p class="text-slate-500 dark:text-slate-400">土壤表層硬結白化，生產力下降甚至完全喪失</p>
+          </div>
+          <div class="p-4 rounded-xl bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 text-xs">
+            <span class="w-6 h-6 rounded-full bg-purple-500 text-white font-bold inline-flex items-center justify-center mb-2">5</span>
+            <div class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1">氣候難民與衝突</div>
+            <p class="text-slate-500 dark:text-slate-400">飢荒蔓延、數千萬人被迫遷徙，資源爭奪加劇</p>
+          </div>
+        </div>
+
+        <div class="p-4 bg-emerald-50 dark:bg-emerald-950/40 rounded-2xl border border-emerald-200 dark:border-emerald-800 text-xs flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div>
+            <span class="font-bold text-emerald-800 dark:text-emerald-300">🌱 國際調適對策：沙黑爾非洲綠色長城計畫 (Great Green Wall)</span>
+            <p class="text-slate-600 dark:text-slate-300 mt-0.5">橫跨非洲11國、長達8,000公里的耐旱植被隔離帶，以原生耐旱金合歡等灌木和草種，阻截撒哈拉沙漠南侵。</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 3: 歷屆大考題庫實戰 (Exam Quiz Master) -->
+    <section id="quiz" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">Module 03</span>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white">歷屆分科測驗・學測・指考 大考題庫實戰</h3>
+        </div>
+        <div class="flex items-center gap-3 text-xs font-semibold mt-2 sm:mt-0">
+          <span class="text-slate-500">當前進度：<span id="quizProgressText" class="text-purple-600 font-bold">1 / 12</span></span>
+          <span class="text-slate-500">得分：<span id="quizScoreText" class="text-emerald-600 font-bold">0 分</span></span>
+        </div>
+      </div>
+
+      <!-- Quiz Interactive Container -->
+      <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-100 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+          <div id="quizProgressBar" class="bg-gradient-to-r from-purple-500 to-indigo-500 h-full w-[8.33%] transition-all duration-300"></div>
+        </div>
+
+        <!-- Question Card -->
+        <div id="questionCard" class="space-y-4">
+          <div class="flex items-center gap-2">
+            <span id="qBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300">
+              114 分科測驗
+            </span>
+            <span id="qCategory" class="text-xs font-medium text-slate-400">水文歷線與水壩效應</span>
+          </div>
+
+          <!-- Question Text -->
+          <h4 id="qTitle" class="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-relaxed">
+            <!-- Populated by JS -->
+          </h4>
+
+          <!-- Question Prompt / Context (if any) -->
+          <div id="qContext" class="p-3.5 bg-slate-50 dark:bg-slate-900/50 rounded-xl text-xs sm:text-sm text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hidden">
+            <!-- Context -->
+          </div>
+
+          <!-- Options Grid -->
+          <div id="optionsGrid" class="grid grid-cols-1 gap-2.5 pt-2">
+            <!-- Buttons dynamically generated -->
+          </div>
+
+          <!-- Feedback & Explanation (Hidden initially) -->
+          <div id="explanationBox" class="hidden p-4 rounded-2xl border transition-all duration-300">
+            <div id="feedbackTitle" class="font-bold text-sm mb-1.5 flex items-center gap-2"></div>
+            <p id="explanationText" class="text-xs sm:text-sm leading-relaxed"></p>
+          </div>
+
+          <!-- Quiz Action Buttons -->
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700/60">
+            <button onclick="prevQuestion()" id="prevQBtn" class="px-4 py-2 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed">
+              ← 上一題
+            </button>
+            <button onclick="nextQuestion()" id="nextQBtn" class="px-5 py-2 rounded-xl text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white shadow-sm transition">
+              下一題 →
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Completion View (Hidden initially) -->
+        <div id="quizResultView" class="hidden text-center py-8 space-y-4">
+          <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 flex items-center justify-center mx-auto text-2xl font-black">
+            🏆
+          </div>
+          <h4 class="text-2xl font-bold text-slate-900 dark:text-white">測驗完成！</h4>
+          <p class="text-sm text-slate-600 dark:text-slate-300">
+            您的總得分為：<span id="finalScore" class="text-2xl font-black text-purple-600">0</span> / 120 分
+          </p>
+          <div id="scoreBadgeText" class="text-xs font-bold inline-block px-4 py-1.5 rounded-full bg-purple-100 text-purple-800">
+            地理與地科探索大師
+          </div>
+          <div class="pt-4">
+            <button onclick="restartQuiz()" class="px-6 py-2.5 rounded-xl bg-purple-600 text-white text-xs font-bold hover:bg-purple-700 shadow transition">
+              重新測驗一次
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: 核心詞典速查庫 (Glossary) -->
+    <section id="glossary" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Module 04</span>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white">核心名詞與大考高頻詞典</h3>
+        </div>
+        <!-- Search bar -->
+        <div class="relative w-full sm:w-72 mt-2 sm:mt-0">
+          <input type="text" id="glossarySearch" placeholder="搜尋名詞（如：凌汛、順向坡、TEK...）" oninput="filterGlossary()" class="w-full text-xs bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2 outline-none focus:ring-2 focus:ring-emerald-500">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Glossary Grid -->
+      <div id="glossaryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Dynamically rendered glossary cards -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="mt-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        <span class="font-bold text-slate-700 dark:text-slate-300">高中地理與地球科學・Ch02 自然災害與土地退化</span>
+        <span>| 數位互動教材</span>
+      </div>
+      <div>
+        依據 Super講義與歷屆分科大考真題精心編寫 ｜ 雙擊即開・純前端免裝伺服器
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    /* ===================================================
+       1. SOUND EFFECTS (Web Audio API - Zero External Files)
+       =================================================== */
+    let audioCtx = null;
+    let isSoundOn = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playTone(freq, type, duration, gainVal = 0.1) {
+      if (!isSoundOn) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        console.warn('Audio not allowed yet:', e);
+      }
+    }
+
+    function playSuccessSound() {
+      playTone(523.25, 'sine', 0.15, 0.12);
+      setTimeout(() => playTone(659.25, 'sine', 0.2, 0.15), 100);
+      setTimeout(() => playTone(783.99, 'sine', 0.35, 0.18), 200);
+    }
+
+    function playErrorSound() {
+      playTone(220, 'triangle', 0.25, 0.15);
+      setTimeout(() => playTone(180, 'triangle', 0.35, 0.18), 120);
+    }
+
+    function playClickSound() {
+      playTone(400, 'sine', 0.08, 0.05);
+    }
+
+    function toggleSound() {
+      isSoundOn = !isSoundOn;
+      document.getElementById('soundOnIcon').classList.toggle('hidden', !isSoundOn);
+      document.getElementById('soundOffIcon').classList.toggle('hidden', isSoundOn);
+      if (isSoundOn) playSuccessSound();
+    }
+
+    /* ===================================================
+       2. DARK / LIGHT THEME TOGGLE
+       =================================================== */
+    function toggleDarkMode() {
+      playClickSound();
+      const html = document.documentElement;
+      const isDark = html.classList.toggle('dark');
+      document.getElementById('moonIcon').classList.toggle('hidden', isDark);
+      document.getElementById('sunIcon').classList.toggle('hidden', !isDark);
+      drawHydrograph(); // Redraw canvas for theme contrast
+    }
+
+    /* ===================================================
+       3. TOPIC TABS SWITCHER
+       =================================================== */
+    function switchTab(index) {
+      playClickSound();
+      const buttons = document.querySelectorAll('.tab-btn');
+      const panels = document.querySelectorAll('.tab-panel');
+
+      buttons.forEach((btn, idx) => {
+        if (idx === index) {
+          btn.classList.add('bg-white', 'dark:bg-slate-700', 'text-emerald-700', 'dark:text-emerald-300', 'shadow-sm');
+          btn.classList.remove('text-slate-600', 'dark:text-slate-400');
+        } else {
+          btn.classList.remove('bg-white', 'dark:bg-slate-700', 'text-emerald-700', 'dark:text-emerald-300', 'shadow-sm');
+          btn.classList.add('text-slate-600', 'dark:text-slate-400');
+        }
+      });
+
+      panels.forEach((p, idx) => {
+        p.classList.toggle('hidden', idx !== index);
+      });
+    }
+
+    /* ===================================================
+       4. HYDROGRAPH SIMULATOR (Canvas-based)
+       =================================================== */
+    const hydroCanvas = document.getElementById('hydroCanvas');
+    const hCtx = hydroCanvas.getContext('2d');
+
+    function resetHydroDefaults() {
+      playClickSound();
+      document.getElementById('rainInput').value = 60;
+      document.getElementById('urbanInput').value = 30;
+      document.getElementById('forestInput').value = 70;
+      document.getElementById('slopeInput').value = 25;
+      document.getElementById('spongeSelect').value = 'basic';
+      updateHydrograph();
+    }
+
+    function updateHydrograph() {
+      const rain = parseInt(document.getElementById('rainInput').value);
+      const urban = parseInt(document.getElementById('urbanInput').value);
+      const forest = parseInt(document.getElementById('forestInput').value);
+      const slope = parseInt(document.getElementById('slopeInput').value);
+      const sponge = document.getElementById('spongeSelect').value;
+
+      document.getElementById('rainValText').innerText = rain + ' mm/hr';
+      document.getElementById('urbanValText').innerText = urban + '%';
+      document.getElementById('forestValText').innerText = forest + '%';
+      document.getElementById('slopeValText').innerText = slope + '°';
+
+      // Mathematical Model for Hydrograph Curve
+      // Base discharge curve calculation
+      // Urbanization increases peak, reduces lag time
+      // Forest increases lag time, reduces peak
+      // Slope increases peak and reduces lag time
+      // Sponge reduces peak and extends lag time
+
+      let spongeFactor = 1.0;
+      let spongeLagAdd = 0;
+      if (sponge === 'basic') {
+        spongeFactor = 0.85;
+        spongeLagAdd = 1.0;
+      } else if (sponge === 'advanced') {
+        spongeFactor = 0.65;
+        spongeLagAdd = 2.5;
+      }
+
+      // Lag time (hours)
+      let lagTime = 6.0 - (urban * 0.035) - (slope * 0.05) + (forest * 0.03) + spongeLagAdd;
+      lagTime = Math.max(1.2, Math.min(9.0, lagTime));
+
+      // Peak discharge (cms)
+      let peakDischarge = (rain * 2.8) * (1 + urban * 0.012) * (1 + (slope - 20) * 0.015) * (1 - forest * 0.005) * spongeFactor;
+      peakDischarge = Math.max(60, Math.round(peakDischarge));
+
+      // Runoff coefficient (%)
+      let runoffCoef = Math.round(20 + urban * 0.55 - forest * 0.25 + (sponge === 'advanced' ? -20 : (sponge === 'basic' ? -8 : 0)));
+      runoffCoef = Math.max(15, Math.min(95, runoffCoef));
+
+      // Display metrics
+      document.getElementById('statPeak').innerText = peakDischarge + ' cms';
+      document.getElementById('statLag').innerText = lagTime.toFixed(1) + ' 小時';
+      document.getElementById('statRunoff').innerText = runoffCoef + '%';
+
+      // Risk level
+      const riskEl = document.getElementById('statRisk');
+      const explainEl = document.getElementById('hydroExplainBox');
+
+      if (peakDischarge > 550 || lagTime < 2.0) {
+        riskEl.innerText = '🚨 極高水患警報';
+        riskEl.className = 'text-sm font-extrabold text-rose-600 mt-1';
+        explainEl.className = 'p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-xs text-rose-900 dark:text-rose-200';
+        explainEl.innerHTML = `⚠️ <b>嚴重水患警戒：</b>目前洪峰流量達 <b>${peakDischarge} cms</b>，洪峰延滯期僅 <b>${lagTime.toFixed(1)} 小時</b>！因都市化水泥覆蓋過高或缺乏森林滯洪，地表逕流極度迅速匯聚，下游低窪及凹岸河段面臨溢堤滅頂危險！建議立刻啟動海綿城市滯洪池調節！`;
+      } else if (peakDischarge > 350 || lagTime < 3.2) {
+        riskEl.innerText = '⚡ 中度戒備';
+        riskEl.className = 'text-sm font-extrabold text-amber-500 mt-1';
+        explainEl.className = 'p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-xs text-amber-900 dark:text-amber-200';
+        explainEl.innerHTML = `⚖️ <b>中度逕流負荷：</b>當前暴雨強度下，河川流量接近河道設計容量上限。適度增加集水區林覆蓋率與綠屋頂，可顯著向右拉長洪峰延滯期、平抑洪峰！`;
+      } else {
+        riskEl.innerText = '🛡️ 安全・調適良好';
+        riskEl.className = 'text-sm font-extrabold text-emerald-600 dark:text-emerald-400 mt-1';
+        explainEl.className = 'p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-900 dark:text-emerald-200';
+        explainEl.innerHTML = `💡 <b>優質水文狀態：</b>森林水土保持良好搭配先進海綿城市設施，洪峰被有效削平至 <b>${peakDischarge} cms</b>，延滯期長達 <b>${lagTime.toFixed(1)} 小時</b>，河川具備高容受力與韌性！`;
+      }
+
+      drawHydrograph(peakDischarge, lagTime);
+    }
+
+    function drawHydrograph(peak = 385, lag = 3.5) {
+      const w = hydroCanvas.width;
+      const h = hydroCanvas.height;
+      hCtx.clearRect(0, 0, w, h);
+
+      const isDark = document.documentElement.classList.contains('dark');
+      const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.12)';
+      const textColor = isDark ? '#94a3b8' : '#cbd5e1';
+
+      // Draw Grid & Axes
+      hCtx.strokeStyle = gridColor;
+      hCtx.lineWidth = 1;
+
+      // X grid (hours 0 to 12)
+      for (let i = 0; i <= 12; i += 2) {
+        let x = 50 + (i / 12) * (w - 70);
+        hCtx.beginPath();
+        hCtx.moveTo(x, 20);
+        hCtx.lineTo(x, h - 35);
+        hCtx.stroke();
+
+        hCtx.fillStyle = textColor;
+        hCtx.font = '10px monospace';
+        hCtx.textAlign = 'center';
+        hCtx.fillText(i + 'h', x, h - 20);
+      }
+
+      // Y grid (Discharge 0 to 800 cms)
+      for (let d = 0; d <= 800; d += 200) {
+        let y = (h - 35) - (d / 800) * (h - 60);
+        hCtx.beginPath();
+        hCtx.moveTo(50, y);
+        hCtx.lineTo(w - 20, y);
+        hCtx.stroke();
+
+        hCtx.fillStyle = textColor;
+        hCtx.font = '10px monospace';
+        hCtx.textAlign = 'right';
+        hCtx.fillText(d, 42, y + 3);
+      }
+
+      // Draw Rainfall Hyetograph Bar (at hour 1)
+      hCtx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+      let rainBarX = 50 + (1 / 12) * (w - 70);
+      let rainVal = parseInt(document.getElementById('rainInput')?.value || 60);
+      let barH = (rainVal / 150) * 55;
+      hCtx.fillRect(rainBarX - 12, 20, 24, barH);
+      hCtx.fillStyle = '#38bdf8';
+      hCtx.font = '9px sans-serif';
+      hCtx.textAlign = 'center';
+      hCtx.fillText('暴雨降水', rainBarX, 15);
+
+      // Base Reference Curve (Natural basin, 100% forest, no urbanization)
+      drawCurve(240, 5.5, 'rgba(148, 163, 184, 0.5)', true);
+
+      // Dynamic Simulated Curve
+      drawCurve(peak, lag, '#34d399', false);
+    }
+
+    function drawCurve(peakVal, lagVal, color, isDashed) {
+      const w = hydroCanvas.width;
+      const h = hydroCanvas.height;
+      const baseY = h - 35;
+      const startX = 50;
+      const graphW = w - 70;
+
+      // Peak coordinate
+      let peakX = startX + ((1.0 + lagVal) / 12) * graphW;
+      let peakY = baseY - (peakVal / 800) * (h - 60);
+
+      hCtx.save();
+      hCtx.beginPath();
+      if (isDashed) {
+        hCtx.setLineDash([4, 4]);
+        hCtx.lineWidth = 1.5;
+        hCtx.strokeStyle = color;
+      } else {
+        hCtx.lineWidth = 3;
+        hCtx.strokeStyle = color;
+      }
+
+      // Bezier Hydrograph Curve
+      hCtx.moveTo(startX, baseY);
+      // Rising limb
+      hCtx.bezierCurveTo(
+        startX + (peakX - startX) * 0.4, baseY,
+        peakX - (peakX - startX) * 0.3, peakY + 15,
+        peakX, peakY
+      );
+      // Falling / Recession limb
+      let endX = Math.min(w - 20, peakX + (w - peakX) * 0.85);
+      hCtx.bezierCurveTo(
+        peakX + (endX - peakX) * 0.3, peakY + 20,
+        peakX + (endX - peakX) * 0.6, baseY - 10,
+        endX, baseY
+      );
+      hCtx.stroke();
+
+      // If active curve, fill gradient under curve
+      if (!isDashed) {
+        hCtx.lineTo(startX, baseY);
+        let grad = hCtx.createLinearGradient(0, peakY, 0, baseY);
+        grad.addColorStop(0, 'rgba(52, 211, 153, 0.25)');
+        grad.addColorStop(1, 'rgba(52, 211, 153, 0.0)');
+        hCtx.fillStyle = grad;
+        hCtx.fill();
+
+        // Draw Peak Marker Dot
+        hCtx.beginPath();
+        hCtx.arc(peakX, peakY, 4, 0, Math.PI * 2);
+        hCtx.fillStyle = '#ef4444';
+        hCtx.fill();
+        hCtx.strokeStyle = '#ffffff';
+        hCtx.lineWidth = 1.5;
+        hCtx.stroke();
+
+        // Label Peak
+        hCtx.fillStyle = '#f87171';
+        hCtx.font = 'bold 10px sans-serif';
+        hCtx.textAlign = 'center';
+        hCtx.fillText(`洪峰 ${peakVal} cms`, peakX, peakY - 8);
+      }
+      hCtx.restore();
+    }
+
+    /* ===================================================
+       5. SLOPE MOVEMENT DIAGNOSTIC SIMULATOR
+       =================================================== */
+    const slopeData = {
+      rockfall: {
+        title: '山崩與落石 (Rockfall & Rockslide)',
+        action: '落 (Fall)',
+        speed: '極度迅速（數秒內墜落）',
+        moisture: '含水量少至乾燥',
+        features: '土石受重力直接自峭壁、懸崖高處瞬間脫離墜落。下方常堆積形成倒石堆（岩屑堆）。',
+        caseStudy: '蘇花公路斷崖落石、加州海岸公路山崩',
+        examTip: '速度最快、含水量最低，好發於陡峭坡度！',
+        svg: `<svg viewBox="0 0 240 180" class="w-full h-full">
+          <polygon points="20,160 80,40 120,40 120,160" fill="#78350f" opacity="0.8" />
+          <polygon points="120,40 140,70 140,160 120,160" fill="#92400e" opacity="0.6" />
+          <!-- Falling Rocks -->
+          <circle cx="135" cy="80" r="8" fill="#d97706" />
+          <circle cx="155" cy="115" r="11" fill="#b45309" />
+          <circle cx="170" cy="145" r="9" fill="#92400e" />
+          <path d="M130,55 Q145,85 155,120 T180,160" fill="none" stroke="#ef4444" stroke-dasharray="4,4" stroke-width="2"/>
+          <text x="145" y="30" font-size="11" font-weight="bold" fill="#ef4444">重力直接垂直崩落</text>
+        </svg>`
+      },
+      landslide: {
+        title: '地滑 (Landslide / Bedding Plane Slip)',
+        action: '滑 (Slide)',
+        speed: '快速至中等速度',
+        moisture: '中等至水分飽和',
+        features: '★ 最常發生於「順向坡」！岩層走向與坡面傾角一致。當底層頁岩飽含雨水軟化，上方巨厚岩塊沿著「滑動面」整體向下錯動滑落。',
+        caseStudy: '2010年國道3號七堵走山、新北市瑞芳至猴硐鐵路邊坡坍塌',
+        examTip: '大考必考：滑動面清晰可見，滑動體上方建築斷裂沉陷，下方遭掩埋！',
+        svg: `<svg viewBox="0 0 240 180" class="w-full h-full">
+          <!-- Inclined Strata (Dip Slope) -->
+          <polygon points="20,160 180,40 220,70 60,190" fill="#3b82f6" opacity="0.2" />
+          <!-- Sliding Plane -->
+          <line x1="40" y1="150" x2="190" y2="45" stroke="#ef4444" stroke-width="3" stroke-dasharray="5,3"/>
+          <!-- Sliding Body -->
+          <polygon points="120,100 190,45 170,30 100,85" fill="#f59e0b" opacity="0.9" />
+          <!-- Arrow showing movement -->
+          <path d="M165,40 L125,70" fill="none" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow)"/>
+          <text x="70" y="35" font-size="11" font-weight="bold" fill="#dc2626">順向坡面狀整體滑移</text>
+          <text x="130" y="145" font-size="9" fill="#64748b">滑動面 (軟弱泥頁岩層)</text>
+        </svg>`
+      },
+      debris: {
+        title: '土石流 (Debris Flow)',
+        action: '流 (Flow)',
+        speed: '極度迅速（似高黏滯液體狂奔）',
+        moisture: '極高含水量（水流飽和引領）',
+        features: '暴雨過後，山區溪谷水流夾帶大量泥砂、岩塊與巨礫，沿著狹窄河道向下游狂暴奔流，於出口平原谷口形成扇狀堆積。',
+        caseStudy: '莫拉克颱風小林村滅村慘劇、臺中和平松鶴部落',
+        examTip: '大考特徵：發生於「溪谷」、含水量最高、出口呈「扇形堆積」！',
+        svg: `<svg viewBox="0 0 240 180" class="w-full h-full">
+          <!-- Mountain Valley -->
+          <polygon points="20,40 100,120 40,160" fill="#475569" opacity="0.5"/>
+          <polygon points="220,40 140,120 200,160" fill="#475569" opacity="0.5"/>
+          <!-- Debris flow path -->
+          <path d="M120,40 Q115,90 120,120 T100,160" fill="none" stroke="#0ea5e9" stroke-width="12" stroke-linecap="round"/>
+          <path d="M120,40 Q125,90 120,120 T140,160" fill="none" stroke="#78350f" stroke-width="8" stroke-linecap="round"/>
+          <!-- Fan deposition -->
+          <ellipse cx="120" cy="155" rx="45" ry="15" fill="#d97706" opacity="0.7"/>
+          <text x="120" y="25" text-anchor="middle" font-size="11" font-weight="bold" fill="#0284c7">溪谷暴洪夾帶巨礫 (扇狀堆積)</text>
+        </svg>`
+      },
+      creep: {
+        title: '潛移 (Soil Creep)',
+        action: '緩動 (Creep)',
+        speed: '極度緩慢（每年數公釐至數公分）',
+        moisture: '乾濕、凍融反覆交替',
+        features: '表層土壤受重力與乾濕交替熱脹冷縮影響，順著坡面極緩慢向下滑移，肉眼不可察覺。地表植物根系、電線桿、圍牆長期呈現彎曲傾斜。',
+        caseStudy: '桃園東眼山森林遊樂區邊坡',
+        examTip: '速度最慢！標誌性特徵為「彎曲的樹幹」與「傾斜的柵欄」！',
+        svg: `<svg viewBox="0 0 240 180" class="w-full h-full">
+          <!-- Slope -->
+          <polygon points="20,150 200,60 220,90 40,180" fill="#10b981" opacity="0.3"/>
+          <!-- Curved Trees -->
+          <path d="M70,125 Q75,105 85,90" fill="none" stroke="#78350f" stroke-width="5"/>
+          <circle cx="85" cy="85" r="14" fill="#059669"/>
+          <path d="M130,95 Q135,75 145,60" fill="none" stroke="#78350f" stroke-width="5"/>
+          <circle cx="145" cy="55" r="14" fill="#059669"/>
+          <!-- Tilting Fence -->
+          <line x1="170" y1="75" x2="178" y2="55" stroke="#94a3b8" stroke-width="3"/>
+          <text x="120" y="165" text-anchor="middle" font-size="10" font-weight="bold" fill="#059669">樹幹基部因表土滑動而呈現弧形彎曲</text>
+        </svg>`
+      }
+    };
+
+    function selectSlopeType(type) {
+      playClickSound();
+      document.querySelectorAll('.slope-type-btn').forEach(btn => {
+        btn.classList.remove('active-slope', 'border-amber-500', 'bg-amber-50', 'dark:bg-amber-950/40', 'text-amber-900', 'dark:text-amber-200');
+        btn.classList.add('border-slate-200', 'dark:border-slate-700');
+      });
+
+      const activeBtn = document.getElementById('btn-' + type);
+      if (activeBtn) {
+        activeBtn.classList.add('active-slope', 'border-amber-500', 'bg-amber-50', 'dark:bg-amber-950/40', 'text-amber-900', 'dark:text-amber-200');
+      }
+
+      const d = slopeData[type];
+      document.getElementById('slopeSvgContainer').innerHTML = d.svg;
+      document.getElementById('slopeDetailBox').innerHTML = `
+        <h5 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          ${d.title}
+          <span class="text-xs px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300">${d.action}</span>
+        </h5>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <span class="text-slate-400 block">移動速度</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200">${d.speed}</span>
+          </div>
+          <div class="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <span class="text-slate-400 block">含水量特徵</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200">${d.moisture}</span>
+          </div>
+        </div>
+        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${d.features}</p>
+        <div class="p-2.5 rounded-lg bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-200 text-xs">
+          <b>🎯 大考解題要訣：</b>${d.examTip}
+        </div>
+        <div class="text-[11px] text-slate-500">
+          <b>典型災例：</b>${d.caseStudy}
+        </div>
+      `;
+    }
+
+    /* ===================================================
+       6. TEK SEASON SELECTOR
+       =================================================== */
+    function selectTekSeason(season) {
+      playClickSound();
+      document.querySelectorAll('.tek-season-card').forEach(card => {
+        card.classList.remove('border-emerald-500', 'bg-emerald-50/60', 'dark:bg-emerald-950/30', 'border-amber-500', 'bg-amber-50/60', 'border-blue-500', 'bg-blue-50/60');
+        card.classList.add('border-slate-200', 'dark:border-slate-700', 'bg-white', 'dark:bg-slate-800');
+      });
+
+      const cur = document.getElementById('card-' + season);
+      if (season === 'spring') {
+        cur.classList.add('border-emerald-500', 'bg-emerald-50/60', 'dark:bg-emerald-950/30');
+      } else if (season === 'summer') {
+        cur.classList.add('border-amber-500', 'bg-amber-50/60', 'dark:bg-amber-950/30');
+      } else if (season === 'winter') {
+        cur.classList.add('border-blue-500', 'bg-blue-50/60', 'dark:bg-blue-950/30');
+      }
+    }
+
+    /* ===================================================
+       7. EXAM QUIZ DATA & LOGIC (12 Questions from slides)
+       =================================================== */
+    const quizQuestions = [
+      {
+        id: 1,
+        source: '114 年分科測驗',
+        category: '水文歷線與水壩生態調節',
+        title: '河狸在河流中建造水壩，有「自然界水壩工程師」之稱。該水壩未被洪水沖毀期間，對該河流最可能產生下列哪些影響？',
+        context: '甲、減少水壩上游入滲量　乙、降低水壩下游洪峰流量　丙、減少水壩上游地表逕流量　丁、減少水壩下游河流輸沙量',
+        options: [
+          '(A) 甲乙',
+          '(B) 甲丙',
+          '(C) 乙丁',
+          '(D) 丙丁'
+        ],
+        answer: 2, // (C)
+        explanation: '正確答案為 (C)。(乙) 水壩能暫時儲存大量水量，調節水流使下游洪峰流量降低並延後；(丁) 水壩會攔截泥沙促使上游沉積，使下游輸沙量明顯減少。(甲錯誤：水壩使上游水位抬高形成濕地，入滲量會增加；丙錯誤：地表水匯聚滯留，並非上游逕流減少)。'
+      },
+      {
+        id: 2,
+        source: '114 年分科測驗',
+        category: '原住民族傳統生態知識 (TEK)',
+        title: '研究指出：「阿美族女性以採摘野菜為主，會隨著季節時令及地域不同，有什麼便採集什麼，採摘剛好的量，避免整株拔起，只取嫩葉食用。」題文敘述何者最能直接說明阿美族的傳統生態知識？',
+        options: [
+          '(A) 居住環境不同而發展出相異飲食特色',
+          '(B) 上山狩獵出發前有特定儀式',
+          '(C) 野菜採集主要為女性的工作與性別分工',
+          '(D) 採摘剛好的量，避免整株拔起，只取嫩葉食用'
+        ],
+        answer: 3, // (D)
+        explanation: '正確答案為 (D)。傳統生態知識 (TEK) 的核心實質內涵包括透過策略性規劃來確保資源的維護、經營管理與永續利用。「採摘剛好的量，避免整株拔起，只取嫩葉」具體展現了資源永續經營的智慧實踐。'
+      },
+      {
+        id: 3,
+        source: '113 年分科測驗',
+        category: '土地水土保持與生態工法',
+        title: '蔓生千斤拔是矮生灌木，根具有固氮作用，抓地力強。尼泊爾農技人員在喜馬拉雅山南坡的梯田邊緣將其作為綠籬。此植物納入農業系統中最可能具有下列哪項環境保育效益？',
+        options: [
+          '(A) 預防病蟲侵害',
+          '(B) 降低侵蝕基準面',
+          '(C) 緩解土壤沖蝕',
+          '(D) 減少植物蒸發散量'
+        ],
+        answer: 2, // (C)
+        explanation: '正確答案為 (C)。千斤拔根系深具固氮與強大抓地力，在坡地梯田邊緣作為綠籬可發揮水土保持功效，有效固著表土並減緩雨水對土壤的沖蝕。'
+      },
+      {
+        id: 4,
+        source: '113 年分科測驗',
+        category: '傳統生態知識與永續農業',
+        title: '臺中市新社區生產文心蘭，部分農友利用鴨子的雜食性，進行園區蝸牛等蟲害防治。若僅依據上述，該地文心蘭產業最可能具有下列哪項經營特徵？',
+        options: [
+          '(A) 透過傳統生態知識建立農作物最佳栽種環境',
+          '(B) 結合周遭多樣觀光資源帶動農業多角化經營',
+          '(C) 藉由生物防治、減少碳足跡以實踐綠色經濟',
+          '(D) 利用生物科技改良出日本市場所需花卉品種'
+        ],
+        answer: 0, // (A)
+        explanation: '正確答案為 (A)。善用鴨子吃蝸牛的食性進行生物防治，乃是利用物種間相互關係以達到人地和諧、友善共生的傳統生態知識實踐。'
+      },
+      {
+        id: 5,
+        source: '111 年分科測驗',
+        category: '原住民族傳統生態知識 (TEK)',
+        title: '黃荊全株可入藥，是原住民與漢人常用保健植物。原住民在山林採集此植物時效率遠較植物學家高，主要是原住民具有下列何種傳統生態知識？',
+        options: [
+          '(A) 熟悉黃荊的生物分類體系',
+          '(B) 熟悉黃荊的微觀外觀特徵',
+          '(C) 熟悉黃荊的藥用化學療效',
+          '(D) 熟悉黃荊的在地微棲地空間分布'
+        ],
+        answer: 3, // (D)
+        explanation: '正確答案為 (D)。TEK 建立在長期與在地環境互動的經驗上，原住民對山林微環境、坡向、海拔與黃荊的在地生長棲地極為熟稔，因此能快速定位尋獲。'
+      },
+      {
+        id: 6,
+        source: '111 年分科測驗',
+        category: '板塊運動與地球物理災害',
+        title: '美國西岸（加州沿海）與日本東岸兩地，最可能受到下列哪些相同自然災害的威脅？',
+        context: '甲、野火　乙、颱風　丙、地震　丁、蝗災　戊、火山爆發',
+        options: [
+          '(A) 甲乙',
+          '(B) 丙戊',
+          '(C) 丁戊',
+          '(D) 乙丁'
+        ],
+        answer: 1, // (B)
+        explanation: '正確答案為 (B)。美國西岸與日本東岸皆地處「環太平洋火山地震帶」，板塊推擠作用劇烈，因此皆飽受「地震與火山爆發」威脅。（加州為地中海氣候涼流經過無颱風；日本夏季潮濕多雨鮮少大規模野火）。'
+      },
+      {
+        id: 7,
+        source: '109 年指考',
+        category: '地質構造與地震減災',
+        title: '臺灣常見之災害地景中，出現次數最多者為斷層錯動誘發地震造成建物破壞與地表隆起。下列哪種作法最能降低此類災害的損失？',
+        options: [
+          '(A) 避免在活動斷層線周遭進行土地開發',
+          '(B) 注意地下水抽取量不超過補注量',
+          '(C) 針對環境敏感區進行坡地護坡水保工程',
+          '(D) 在都市設置親水公園以提高滯洪功能'
+        ],
+        answer: 0, // (A)
+        explanation: '正確答案為 (A)。地震是由斷層錯動引發，根本減災避災之道即是劃定活動斷層敏感帶，嚴格限制斷層帶兩側之高密度建築與土地開發。'
+      },
+      {
+        id: 8,
+        source: '104 年學測',
+        category: '土地退化與沙漠化防治',
+        title: '中國對乾旱區沙漠化的治理，不少專家認為沙漠化地區多位於半乾旱草原區，因此應「師法自然以植草取代種樹」。持此看法的專家所依據的理由最可能是？',
+        context: '甲、樹林擋沙防風功能比草原低　乙、樹林根部向四周延展小於草原　丙、降水環境較適宜草原發展不利樹木　丁、樹木蒸發散較草原強烈導致水分更易流失',
+        options: [
+          '(A) 甲乙',
+          '(B) 甲丁',
+          '(C) 乙丙',
+          '(D) 丙丁'
+        ],
+        answer: 3, // (D)
+        explanation: '正確答案為 (D)。半乾旱區年降水量有限（約250-500mm），本身生態承載力即適合草類生長（丙）；且喬木樹冠大、蒸發散作用極為旺盛，大規模種樹反而會耗盡地下珍貴水資源（丁），故以植草覆蓋地表為上策。'
+      },
+      {
+        id: 9,
+        source: '100 年指考',
+        category: '水文歷線偏移分析',
+        title: '在相同降雨條件下，若一條河流測站未來的「水文歷線洪峰」點呈現向左偏移（延滯時間縮短）的情形，最可能反映下列哪種集水區環境變化？',
+        options: [
+          '(A) 測站上游植被遭受破壞或都市化不透水面積增加',
+          '(B) 測站上游興建大型水庫進行蓄洪調節',
+          '(C) 測站下游河道大規模加高堤防',
+          '(D) 測站下游大量引水灌溉農田'
+        ],
+        answer: 0, // (A)
+        explanation: '正確答案為 (A)。洪峰向左偏移代表暴雨至最高流量的「延滯時間縮短」，表示地表雨水迅速匯集流入河道，此為集水區森林砍伐裸露、地表入滲減低或高度都市化鋪設柏油水泥後的典型特徵。'
+      },
+      {
+        id: 10,
+        source: '講義經典核心題',
+        category: '水文災害・凌汛 (Ice Jam)',
+        title: '凌汛是特定河流在結冰初期或融冰時發生的嚴重洪患。下列哪一條河流具備最典型容易發生凌汛的地理條件？',
+        options: [
+          '(A) 美國密西西比河（由北向南流）',
+          '(B) 俄羅斯鄂畢河（由低緯向高緯北流）',
+          '(C) 印度恆河（熱帶季風氣候向南流）',
+          '(D) 埃及尼羅河（熱帶沙漠氣候向北流）'
+        ],
+        answer: 1, // (B)
+        explanation: '正確答案為 (B)。凌汛好發於「冬季會結冰的中高緯地區」且「由低緯流向高緯」的河流。鄂畢河北流注入北極海，春季上游低緯較溫暖先融冰，水流攜帶浮冰往下游衝，但下游高緯仍處於冰封凍結狀態，浮冰堆塞河道築成冰壩，導致河水氾濫。'
+      },
+      {
+        id: 11,
+        source: '講義經典核心題',
+        category: '荷蘭治水革新與海綿城市',
+        title: '荷蘭在治水政策上從早期的「與海爭地」轉向近代的「與水共存」。下列哪些措施具體符合這項新觀念？',
+        context: '甲、將部分填海圩田恢復為湖泊沼澤以利滯洪　乙、將堤防不斷加高加厚　丙、打造隨水位升降的水陸兩棲漂浮屋　丁、海堤往外海方向填築擴張',
+        options: [
+          '(A) 甲丙',
+          '(B) 甲丁',
+          '(C) 乙丙',
+          '(D) 乙丁'
+        ],
+        answer: 0, // (A)
+        explanation: '正確答案為 (A)。荷蘭現代「還地於河」(Room for the River) 核心思想是給河川容受洪水的空間，將部分農耕圩田還原成滯洪濕地（甲），並發展漂浮兩棲建築適應海平面上升（丙）。乙與丁為早期「人定勝天」圍海爭地思維。'
+      },
+      {
+        id: 12,
+        source: '講義經典核心題',
+        category: '坡地災害地形判識',
+        title: '新北市瑞芳至猴硐鐵路邊坡坍塌，岩體順著滑動面整片向下錯動。此種塊體運動最可能與該地何種地質特性密切相關？',
+        options: [
+          '(A) 地下水位長期枯竭且土壤極度乾燥',
+          '(B) 位於陡峭深切之溪谷匯流處',
+          '(C) 岩層走向與坡向傾角一致（順向坡）',
+          '(D) 地表覆蓋厚層珊瑚礁石灰岩'
+        ],
+        answer: 2, // (C)
+        explanation: '正確答案為 (C)。岩層傾斜方向與山坡坡向一致的「順向坡」，若坡腳因開挖道路被切斷，或雨水滲入軟弱頁岩層使摩擦力劇降，整片上覆岩層即會順坡下滑發生地滑（如國道3號七堵走山與猴硐坍方）。'
+      }
+    ];
+
+    let currentQIndex = 0;
+    let userAnswers = new Array(quizQuestions.length).fill(null);
+    let quizScore = 0;
+
+    function renderQuestion() {
+      const q = quizQuestions[currentQIndex];
+      document.getElementById('qBadge').innerText = q.source;
+      document.getElementById('qCategory').innerText = q.category;
+      document.getElementById('qTitle').innerText = `${currentQIndex + 1}. ${q.title}`;
+      
+      const contextEl = document.getElementById('qContext');
+      if (q.context) {
+        contextEl.innerText = q.context;
+        contextEl.classList.remove('hidden');
+      } else {
+        contextEl.classList.add('hidden');
+      }
+
+      // Progress text & bar
+      document.getElementById('quizProgressText').innerText = `${currentQIndex + 1} / ${quizQuestions.length}`;
+      const pct = ((currentQIndex + 1) / quizQuestions.length) * 100;
+      document.getElementById('quizProgressBar').style.width = pct + '%';
+
+      // Options
+      const grid = document.getElementById('optionsGrid');
+      grid.innerHTML = '';
+
+      const answered = userAnswers[currentQIndex] !== null;
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'w-full text-left p-3.5 rounded-xl border text-xs sm:text-sm font-medium transition flex items-center justify-between ';
+        
+        if (!answered) {
+          btn.className += 'bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-700 hover:bg-purple-50 dark:hover:bg-purple-950/40 hover:border-purple-300';
+          btn.onclick = () => handleSelectOption(idx);
+        } else {
+          // Already answered, show colors
+          if (idx === q.answer) {
+            btn.className += 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-500 text-emerald-900 dark:text-emerald-200 font-bold';
+            btn.innerHTML = `<span>${opt}</span><span class="text-emerald-600 font-bold">✓ 正確解答</span>`;
+          } else if (idx === userAnswers[currentQIndex]) {
+            btn.className += 'bg-rose-50 dark:bg-rose-950/60 border-rose-500 text-rose-900 dark:text-rose-200 font-bold';
+            btn.innerHTML = `<span>${opt}</span><span class="text-rose-600 font-bold">✕ 您的作答</span>`;
+          } else {
+            btn.className += 'bg-slate-50 dark:bg-slate-900/30 border-slate-200 dark:border-slate-800 opacity-60';
+            btn.innerText = opt;
+          }
+        }
+
+        if (!answered) {
+          btn.innerText = opt;
+        }
+
+        grid.appendChild(btn);
+      });
+
+      // Show/Hide Explanation
+      const explainBox = document.getElementById('explanationBox');
+      if (answered) {
+        explainBox.classList.remove('hidden');
+        const isCorrect = userAnswers[currentQIndex] === q.answer;
+        if (isCorrect) {
+          explainBox.className = 'p-4 rounded-2xl border border-emerald-300 dark:border-emerald-800 bg-emerald-50/80 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200';
+          document.getElementById('feedbackTitle').innerHTML = '<span class="text-emerald-600 font-black">🎉 恭喜答對！</span>';
+        } else {
+          explainBox.className = 'p-4 rounded-2xl border border-rose-300 dark:border-rose-800 bg-rose-50/80 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200';
+          document.getElementById('feedbackTitle').innerHTML = '<span class="text-rose-600 font-black">💡 觀念釐清：</span>';
+        }
+        document.getElementById('explanationText').innerText = q.explanation;
+      } else {
+        explainBox.classList.add('hidden');
+      }
+
+      // Prev/Next buttons state
+      document.getElementById('prevQBtn').disabled = (currentQIndex === 0);
+      document.getElementById('nextQBtn').innerText = (currentQIndex === quizQuestions.length - 1) ? '查看測驗成果 🏆' : '下一題 →';
+    }
+
+    function handleSelectOption(idx) {
+      if (userAnswers[currentQIndex] !== null) return;
+      userAnswers[currentQIndex] = idx;
+
+      const q = quizQuestions[currentQIndex];
+      if (idx === q.answer) {
+        playSuccessSound();
+        quizScore += 10;
+      } else {
+        playErrorSound();
+      }
+
+      document.getElementById('quizScoreText').innerText = quizScore + ' 分';
+      renderQuestion();
+    }
+
+    function prevQuestion() {
+      playClickSound();
+      if (currentQIndex > 0) {
+        currentQIndex--;
+        renderQuestion();
+      }
+    }
+
+    function nextQuestion() {
+      playClickSound();
+      if (currentQIndex < quizQuestions.length - 1) {
+        currentQIndex++;
+        renderQuestion();
+      } else {
+        // Show result view
+        showQuizResults();
+      }
+    }
+
+    function showQuizResults() {
+      playSuccessSound();
+      document.getElementById('questionCard').classList.add('hidden');
+      const resultView = document.getElementById('quizResultView');
+      resultView.classList.remove('hidden');
+
+      document.getElementById('finalScore').innerText = quizScore;
+      const badge = document.getElementById('scoreBadgeText');
+      if (quizScore >= 110) {
+        badge.innerText = '🌟 防災地理地科狀元・滿分神人！';
+        badge.className = 'text-xs font-bold inline-block px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200';
+      } else if (quizScore >= 80) {
+        badge.innerText = '🛡️ 地理實力堅強・大考先鋒！';
+        badge.className = 'text-xs font-bold inline-block px-4 py-1.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+      } else {
+        badge.innerText = '🌱 潛力無窮・複習講義後再戰！';
+        badge.className = 'text-xs font-bold inline-block px-4 py-1.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200';
+      }
+    }
+
+    function restartQuiz() {
+      playClickSound();
+      currentQIndex = 0;
+      quizScore = 0;
+      userAnswers = new Array(quizQuestions.length).fill(null);
+      document.getElementById('quizScoreText').innerText = '0 分';
+      document.getElementById('quizResultView').classList.add('hidden');
+      document.getElementById('questionCard').classList.remove('hidden');
+      renderQuestion();
+    }
+
+    /* ===================================================
+       8. GLOSSARY CARDS & SEARCH
+       =================================================== */
+    const glossaryEntries = [
+      {
+        term: '凌汛 (Ice Jam)',
+        category: '水文災害',
+        desc: '中高緯地區由低緯流向高緯之河流（如鄂畢河、育空河），冬末春初融冰期下游因緯度高仍冰封，碎冰堵塞河道形成「冰壩」溢流水患。'
+      },
+      {
+        term: '水文歷線 (Hydrograph)',
+        category: '河川水文',
+        desc: '記錄某河段流量隨時間變化的曲線。核心指標為「洪峰流量」(最高流量) 與「洪峰延滯期」(暴雨至洪峰的時距)。'
+      },
+      {
+        term: '順向坡 (Dip Slope)',
+        category: '坡地地質',
+        desc: '岩層傾斜方向與山坡坡面傾斜方向一致的地質構造。若坡腳因修路被挖除或雨水滲透泥頁岩，極易引發大面積「地滑」（如國道三號走山）。'
+      },
+      {
+        term: '土壤液化 (Soil Liquefaction)',
+        category: '地震災害',
+        desc: '砂質土層在高地下水位環境下，遭受強烈地震劇烈搖晃破壞土粒膠結，孔隙水壓暴增噴砂冒水，導致地基承載力瞬間喪失。'
+      },
+      {
+        term: '聖塔安娜風 (Santa Ana Winds)',
+        category: '氣候氣象',
+        desc: '美國加州冬季越過內華達山脈吹向太平洋的強勁乾燥焚風，風速強烈且溼度極低，為加州洛杉磯致命野火的關鍵推手。'
+      },
+      {
+        term: '沙黑爾 (Sahel)',
+        category: '土地退化',
+        desc: '非洲撒哈拉沙漠南緣的半乾旱熱帶莽原過渡帶，因人口膨脹過度放牧與過耕，飽受全球最嚴重沙漠化與飢荒威脅。'
+      },
+      {
+        term: '傳統生態知識 (TEK)',
+        category: '原住民族文化',
+        desc: '原住民族世代傳承適應生態之生活經驗與環境倫理。包含自然觀察經驗累積、系統性資源時空管理、口述今昔對比與生態和諧信仰。'
+      },
+      {
+        term: '海綿城市 (Sponge City)',
+        category: '韌性防災調適',
+        desc: '都市設計上強化「吸水、蓄水與慢排」能力，如鹿特丹下凹式廣場、地下大型蓄水池、透水鋪面與綠屋頂，降低洪峰並延長延滯期。'
+      },
+      {
+        term: '還地於河 (Room for the River)',
+        category: '防洪治水理念',
+        desc: '荷蘭現代治水哲學：將海堤內移、河堤外移加寬河道、圩田還原為蓄水濕地，給予洪水自然行水與滯洪空間，與水和諧共存。'
+      },
+      {
+        term: '土壤鹽鹼化 (Salinization)',
+        category: '土壤退化',
+        desc: '乾旱蒸發強烈區因不當漫灌抬高地下水位，經毛細作用將深層可溶性鹽分帶至表層累積，土壤硬化導致作物枯死。'
+      },
+      {
+        term: '招魚祭 (Mivanwa)',
+        category: 'TEK 達悟族',
+        desc: '蘭嶼達悟族春季飛魚季開端舉行之神聖儀式，祈求飛魚豐收，並嚴格遵循夜間火把捕魚、禁捕底棲魚之生態資源管理規範。'
+      },
+      {
+        term: '冷燃燒 (Cool Burning)',
+        category: 'TEK 澳洲野火',
+        desc: '澳洲原住民在涼爽濕潤季節點燃微火低溫燃燒林底枯木落葉，清除野火燃料庫存，避免盛夏時爆發失控巨型毀滅性林火。'
+      }
+    ];
+
+    function renderGlossary(filterText = '') {
+      const grid = document.getElementById('glossaryGrid');
+      grid.innerHTML = '';
+      const lower = filterText.toLowerCase().trim();
+
+      const filtered = glossaryEntries.filter(e => 
+        e.term.toLowerCase().includes(lower) ||
+        e.category.toLowerCase().includes(lower) ||
+        e.desc.toLowerCase().includes(lower)
+      );
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 text-xs">查無符合「${filterText}」的相關名詞，請嘗試輸入其他關鍵字。</div>`;
+        return;
+      }
+
+      filtered.forEach(e => {
+        const card = document.createElement('div');
+        card.className = 'p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 card-hover space-y-2';
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900 dark:text-white">${e.term}</h5>
+            <span class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">${e.category}</span>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${e.desc}</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterGlossary() {
+      const val = document.getElementById('glossarySearch').value;
+      renderGlossary(val);
+    }
+
+    /* ===================================================
+       INITIALIZATION ON LOAD
+       =================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      // Init simulators & quiz
+      updateHydrograph();
+      selectSlopeType('rockfall');
+      renderQuestion();
+      renderGlossary();
+
+      // Keyboard navigation for quiz
+      window.addEventListener('keydown', (e) => {
+        if (e.key >= '1' && e.key <= '4') {
+          const optIdx = parseInt(e.key) - 1;
+          handleSelectOption(optIdx);
+        } else if (e.key === 'ArrowRight') {
+          nextQuestion();
+        } else if (e.key === 'ArrowLeft') {
+          prevQuestion();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
